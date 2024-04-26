@@ -9,25 +9,30 @@ void listarContatos(Contato agenda[], int numContatos) {
 }
 
 void deletarContato(Contato agenda[], int *numContatos, char *telefone) {
-    if (*numContatos == 0) {
-        printf("Não há contatos na agenda.\n");
+}
+
+void salvarAgenda(Contato agenda[], int numContatos, char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
         return;
     }
 
-    int encontrado = 0;
-    for (int i = 0; i < *numContatos; i++) {
-        if (strcmp(agenda[i].telefone, telefone) == 0) {
-            printf("Contato deletado: %s - %s\n", agenda[i].nome, agenda[i].telefone);
-            for (int j = i; j < *numContatos - 1; j++) {
-                agenda[j] = agenda[j + 1];
-            }
-            (*numContatos)--;
-            encontrado = 1;
-            break;
-        }
+    fwrite(&numContatos, sizeof(int), 1, arquivo);
+    fwrite(agenda, sizeof(Contato), numContatos, arquivo);
+
+    fclose(arquivo);
+}
+
+void carregarAgenda(Contato agenda[], int *numContatos, char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "rb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
     }
 
-    if (!encontrado) {
-        printf("Contato não encontrado.\n");
-    }
+    fread(numContatos, sizeof(int), 1, arquivo);
+    fread(agenda, sizeof(Contato), *numContatos, arquivo);
+
+    fclose(arquivo);
 }

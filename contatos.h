@@ -9,5 +9,7 @@ typedef struct {
 void adicionarContato(Contato agenda[], int *numContatos);
 void listarContatos(Contato agenda[], int numContatos);
 void deletarContato(Contato agenda[], int *numContatos, char *telefone);
+void salvarAgenda(Contato agenda[], int numContatos, char *nomeArquivo);
+void carregarAgenda(Contato agenda[], int *numContatos, char *nomeArquivo);
 
 #endif

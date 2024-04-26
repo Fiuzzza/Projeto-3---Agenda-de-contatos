@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "contatos.h"
 
 void adicionarContato(Contato agenda[], int *numContatos) {
@@ -21,4 +19,16 @@ void adicionarContato(Contato agenda[], int *numContatos) {
     (*numContatos)++;
 
     printf("Contato adicionado com sucesso!\n");
+}
+
+void listarContatos(Contato agenda[], int numContatos) {
+    if (numContatos == 0) {
+        printf("Não há contatos na agenda.\n");
+        return;
+    }
+
+    printf("Lista de contatos:\n");
+    for (int i = 0; i < numContatos; i++) {
+        printf("Nome: %s\tTelefone: %s\n", agenda[i].nome, agenda[i].telefone);
+    }
 }

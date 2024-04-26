@@ -9,7 +9,8 @@ int main() {
     do {
         printf("\nSelecione uma opção:\n");
         printf("1. Adicionar contato\n");
-        printf("2. Sair\n");
+        printf("2. Listar contatos\n");
+        printf("3. Sair\n");
         printf("Opção: ");
         scanf("%d", &opcao);
 
@@ -18,13 +19,16 @@ int main() {
                 adicionarContato(agenda, &numContatos);
                 break;
             case 2:
+                listarContatos(agenda, numContatos);
+                break;
+            case 3:
                 printf("Saindo...\n");
                 break;
             default:
                 printf("Opção inválida.\n");
                 break;
         }
-    } while (opcao != 2);
+    } while (opcao != 3);
 
     return 0;
 }
